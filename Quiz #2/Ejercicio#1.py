@@ -14,3 +14,13 @@ registraron en ese mes.
 2. Estadísticas por año: se debe de generar un archivo .txt el cual debe contener el año, cantidad de
 temblores registrados en ese año y el promedio de los temblores registrados en ese año. 
 """
+
+dic = {}
+temblores = open("temblores1.csv","r+", encoding='utf-8-sig')
+for linea1 in temblores:
+    linea2 = linea1.replace(",",".")
+    linea3 = linea2.replace(";",",").strip('\n')
+    codigo = linea3[0:4]
+    dic[codigo] = linea3
+    f = open("test.txt","w+")
+    f.write(str(dic)+"\n")
