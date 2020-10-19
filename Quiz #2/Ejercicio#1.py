@@ -15,12 +15,20 @@ registraron en ese mes.
 temblores registrados en ese año y el promedio de los temblores registrados en ese año. 
 """
 
-dic = {}
-temblores = open("temblores1.csv","r+", encoding='utf-8-sig')
-for linea1 in temblores:
-    linea2 = linea1.replace(",",".")
-    linea3 = linea2.replace(";",",").strip('\n')
-    codigo = linea3[0:4]
-    dic[codigo] = linea3
-    f = open("test.txt","w+")
-    f.write(str(dic)+"\n")
+
+class Terremotos():
+    
+    def generarLista(self):
+        lista = []
+        count = 0
+        temblores = open("temblores.csv","r+", encoding='utf-8-sig')
+        for linea in temblores:
+            count +=1
+            linea1 = linea.replace(",",".")
+            linea2 = linea1.replace(";",",")
+            lista.append(linea2)
+            return linea2
+
+
+generar = Terremotos()
+generar.generarLista()
