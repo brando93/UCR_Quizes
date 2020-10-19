@@ -22,12 +22,14 @@ class Terremotos():
         lista = []
         count = 0
         temblores = open("temblores.csv","r+", encoding='utf-8-sig')
+        newfile = open("test.txt","w+")
         for linea in temblores:
             count +=1
             linea1 = linea.replace(",",".")
             linea2 = linea1.replace(";",",")
             lista.append(linea2)
-            return linea2
+            newfile.write(linea2)
+            print(linea2)
 
 
 generar = Terremotos()
