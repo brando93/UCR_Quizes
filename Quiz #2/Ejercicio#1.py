@@ -21,7 +21,7 @@ class Lista():
     def crearList(self):
         lista = []
         dic = {}
-        temblores = open("temblores1.csv","r+", encoding='utf-8-sig')
+        temblores = open("temblores.csv","r+", encoding='utf-8-sig')
         for linea in temblores:
             linea1 = linea.replace(",",".")
             linea2 = linea1.replace(";",",").strip()
@@ -32,11 +32,12 @@ class Lista():
                 dic[year].append(float(magnitud))
             else:
                 dic[year] = [float(magnitud)]
-        print(dic)
         
         for i in dic:
+            cantidad=len(dic.get(i))
             suma= sum(dic.get(i))
-            print(suma)
+            promedio = suma / cantidad
+            print("Year: ",i," Cantidad Sismos :",cantidad,"Promedio Sismos  :","%.2f" % promedio)
   
 generar = Lista()
 generar.crearList()
