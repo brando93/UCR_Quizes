@@ -18,10 +18,11 @@ temblores registrados en ese año y el promedio de los temblores registrados en 
 
 class Lista():
            
-    def crearList(self):
+    def generarReporteAnio(self):
         lista = []
         dic = {}
         temblores = open("temblores.csv","r+", encoding='utf-8-sig')
+        #f = open("test.txt","w+")
         for linea in temblores:
             linea1 = linea.replace(",",".")
             linea2 = linea1.replace(";",",").strip()
@@ -32,12 +33,20 @@ class Lista():
                 dic[year].append(float(magnitud))
             else:
                 dic[year] = [float(magnitud)]
-        
+        #print(dic)
         for i in dic:
             cantidad=len(dic.get(i))
             suma= sum(dic.get(i))
             promedio = suma / cantidad
-            print("Year: ",i," Cantidad Sismos :",cantidad,"Promedio Sismos  :","%.2f" % promedio)
-  
+            anio=str("Year: "+i+" \n")
+            cant_sismo=str("Cantidad Sismos: "+ str(cantidad))
+            promedio_s=str(" Promedio Sismos:"+" %.2f " % promedio+"\n")
+            resultado= anio+cant_sismo+promedio_s
+            print(resultado)
+            space = "\n"
+            #f.write(space)
+            #f.write(str(resultado))
+            #f.write(foo.encode('utf8'))
+      
 generar = Lista()
-generar.crearList()
+generar.generarReporteAnio()
