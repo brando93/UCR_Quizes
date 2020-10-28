@@ -12,7 +12,20 @@ acciones:
 cantidad de temblores del correspondiente mes y el promedio de los temblores que se
 registraron en ese mes.
 2. Estadísticas por año: se debe de generar un archivo .txt el cual debe contener el año, cantidad de
-temblores registrados en ese año y el promedio de los temblores registrados en ese año. 
+temblores registrados en ese año y el promedio de los temblores registrados en ese año.
+Rúbrica
+Descripción Puntaje
+Menú 20 puntos
+Estadísticas por mes 20 puntos
+Estadísticas por año 20 puntos
+ 2 - Ejercicio 2 (20 puntos)
+Escribir dos funciones que permitan calcular:
+a) La duración en segundos de un intervalo dado en horas, minutos y segundos.
+b) La duración en horas, minutos y segundos de un intervalo dado en segundos.
+ 3 - Ejercicio 3 (20 puntos)
+Usando las funciones del ejercicio anterior, escribir un programa que pida al usuario dos
+intervalos expresados en horas, minutos y segundos, sume sus duraciones, y muestre por pantalla la
+duración total en horas, minutos y segundos.
 """
 
 
