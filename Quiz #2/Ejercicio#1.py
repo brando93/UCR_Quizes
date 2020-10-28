@@ -16,37 +16,87 @@ temblores registrados en ese año y el promedio de los temblores registrados en 
 """
 
 
-class Lista():
-           
-    def generarReporteAnio(self):
-        lista = []
-        dic = {}
-        temblores = open("temblores.csv","r+", encoding='utf-8-sig')
-        #f = open("test.txt","w+")
+class ReporteAnual():# Generates anual report
+    def generarAnual(self):
+        self.lista=[]
+        self.dic={}
+        temblores=open("temblores.csv","r", encoding='utf-8-sig')
+        f = open("ReporteAnual.csv","w")
         for linea in temblores:
-            linea1 = linea.replace(",",".")
-            linea2 = linea1.replace(";",",").strip()
-            year = linea2.split(',')[0] # 2015
-            month = linea2.split(',')[1] # 1
-            magnitud = linea2.split(',')[2] #4.0
-            if year in dic:
-                dic[year].append(float(magnitud))
+            linea1=linea.replace(",",".")
+            linea2=linea1.replace(";",",").strip()
+            year=linea2.split(',')[0] # 2015
+            month=linea2.split(',')[1] # 1
+            magnitud=linea2.split(',')[2] # 4.0
+            if year in self.dic:
+                self.dic[year].append(float(magnitud))
             else:
-                dic[year] = [float(magnitud)]
-        #print(dic)
-        for i in dic:
-            cantidad=len(dic.get(i))
-            suma= sum(dic.get(i))
-            promedio = suma / cantidad
+                self.dic[year]=[float(magnitud)]
+                
+        for i in self.dic:
+            cantidad=(len(self.dic.get(i)))
+            promedio=sum(self.dic.get(i))/cantidad
             anio=str("Year: "+i+" \n")
             cant_sismo=str("Cantidad Sismos: "+ str(cantidad))
             promedio_s=str(" Promedio Sismos:"+" %.2f " % promedio+"\n")
             resultado= anio+cant_sismo+promedio_s
-            print(resultado)
-            space = "\n"
-            #f.write(space)
-            #f.write(str(resultado))
-            #f.write(foo.encode('utf8'))
-      
-generar = Lista()
-generar.generarReporteAnio()
+            f.write(str(resultado))
+
+class ReporteMensual():# Generates anual/montly report
+    def generarMensual(self):
+        self.dic={}
+        self.dic2={}
+        temblores=open("temblores.csv","r", encoding='utf-8-sig')
+        f1 = open("ReporteMensual.csv","w")
+        for linea in temblores:
+            linea1=linea.replace(",",".")
+            linea2=linea1.replace(";",",").strip()
+            year=linea2.split(',')[0] # 2015
+            month=linea2.split(',')[1] # 1
+            magnitud=linea2.split(',')[2] # 4.0b
+            if year in self.dic:
+                self.dic[year].append(str(month))
+            else:
+                self.dic[year]=[str(month)]
+
+            if year in self.dic:
+                self.dic[year].append(float(magnitud))
+            else:
+                self.dic[year]=[float(magnitud)]
+
+        for key, value in self.dic.items():
+            for element in value:
+                    mes=(self.dic2.get(key))
+                    anio="año: " + key
+        for key, value in self.dic.items():
+            for element in value:
+                if type(element) is str:
+                    output=str("Year: "+key+"mes"+element+" \n")
+                    f1.write(str(output))
+                if type(element) is float:
+                    output2=str("magnitud del mes: "+ str(element)+"\n")
+                    f1.write(str(output2))
+                        
+generar=ReporteAnual()                        
+generar1=ReporteMensual()
+
+opt = 8
+while opt != 0:
+    
+    print("\n",
+        " 1) Generar reporte anual\n",
+        " 2) Generar report mensual\n",
+        " 3) Calcular segundos/minutos\n",
+        " 5) Salir"
+    )
+    opt= input("Digite una opcion: ")
+    if opt == "1":
+        generar.generarAnual()
+        print("GENERATING FILE --> ReporteAnual.csv")
+    if opt == "2":
+        generar1.generarMensual()
+        print("GENERATING FILE --> ReporteMensual.csv")
+    if opt == "3":
+        None
+    if opt == "5":
+        break      
