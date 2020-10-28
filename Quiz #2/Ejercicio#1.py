@@ -84,7 +84,7 @@ class ReporteMensual():# Generates anual/montly report
         for key, value in self.dic.items():
             for element in value:
                 if type(element) is str:
-                    output=str("Year: "+key+"mes"+element+" \n")
+                    output=str("\nYear: "+key+"\nmes "+element+" \n")
                     f1.write(str(output))
                 if type(element) is float:
                     output2=str("magnitud del mes: "+ str(element)+"\n")
@@ -99,7 +99,8 @@ while opt != 0:
     print("\n",
         " 1) Generar reporte anual\n",
         " 2) Generar report mensual\n",
-        " 3) Calcular segundos/minutos\n",
+        " 3) Calcular segundos\n",
+        " 4) Calcular minutos\n",
         " 5) Salir"
     )
     opt= input("Digite una opcion: ")
@@ -112,4 +113,4 @@ while opt != 0:
     if opt == "3":
         None
     if opt == "5":
-        break      
+        break
