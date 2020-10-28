@@ -115,13 +115,10 @@ class CalcularHMS():
         minutos=int(segundos/60)
         segundos-=minutos*60
         print("%d:%02d:%02d" % (horas, minutos, segundos) )
-    
-    
-        
-                        
-generar=ReporteAnual()                        
-generar1=ReporteMensual()
-generar3=CalcularHMS()
+
+anual=ReporteAnual()                        
+mensual=ReporteMensual()
+calcularhms=CalcularHMS()
 
 opt = 8
 while opt != 0:
@@ -135,14 +132,14 @@ while opt != 0:
     )
     opt= input("Digite una opcion: ")
     if opt == "1":
-        generar.generarAnual()
-        print("FILE.....ReporteAnual.csv")
+        anual.generarAnual()
+        print("CREATED.....ReporteAnual.csv")
     if opt == "2":
-        generar1.generarMensual()
-        print("FILE....ReporteMensual.csv")
+        mensual.generarMensual()
+        print("CREATED....ReporteMensual.csv")
     if opt == "3":
-        generar3.segundos()
+        calcularhms.segundos()
     if opt == "4":
-        generar3.horas()
+        calcularhms.horas()
     if opt == "5":
-        break
+        break  
