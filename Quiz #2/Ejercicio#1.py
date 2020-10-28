@@ -34,7 +34,7 @@ class ReporteAnual():# Generates anual report
         self.lista=[]
         self.dic={}
         temblores=open("temblores.csv","r", encoding='utf-8-sig')
-        f = open("ReporteAnual.csv","w")
+        file_anua = open("ReporteAnual.csv","w")
         for linea in temblores:
             linea1=linea.replace(",",".")
             linea2=linea1.replace(";",",").strip()
@@ -53,14 +53,14 @@ class ReporteAnual():# Generates anual report
             cant_sismo=str("Cantidad Sismos: "+ str(cantidad))
             promedio_s=str(" Promedio Sismos:"+" %.2f " % promedio+"\n")
             resultado= anio+cant_sismo+promedio_s
-            f.write(str(resultado))
+            file_anua.write(str(resultado))
 
 class ReporteMensual():# Generates anual/montly report
     def generarMensual(self):
         self.dic={}
         self.dic2={}
         temblores=open("temblores.csv","r", encoding='utf-8-sig')
-        f1 = open("ReporteMensual.csv","w")
+        file_men = open("ReporteMensual.csv","w")
         for linea in temblores:
             linea1=linea.replace(",",".")
             linea2=linea1.replace(";",",").strip()
@@ -85,32 +85,64 @@ class ReporteMensual():# Generates anual/montly report
             for element in value:
                 if type(element) is str:
                     output=str("\nYear: "+key+"\nmes "+element+" \n")
-                    f1.write(str(output))
+                    file_men.write(str(output))
                 if type(element) is float:
                     output2=str("magnitud del mes: "+ str(element)+"\n")
-                    f1.write(str(output2))
+                    file_men.write(str(output2))
+                    
+                    
+class CalcularHMS():
+    #return "%d:%02d:%02d" % (hour, minutes, seconds) 
+    def segundos():
+        horas= int(input("Digite una opcion: "))
+        minutos= int(input("Digite una opcion: "))
+        segundos= int(input("Digite una opcion: "))
+        
+        horas=int(segundos/3600)
+        segundos-=horas*3600
+        minutos=int(segundos/60)
+        segundos-=minutos*60
+        print("%d:%02d:%02d" % (horas, minutos, segundos) )
+    
+    
+    def horas():
+        horas= int(input("Digite una opcion: "))
+        minutos= int(input("Digite una opcion: "))
+        segundos= int(input("Digite una opcion: "))
+        
+        horas=int(segundos/3600)
+        segundos-=horas*3600
+        minutos=int(segundos/60)
+        segundos-=minutos*60
+        print("%d:%02d:%02d" % (horas, minutos, segundos) )
+    
+    
+        
                         
 generar=ReporteAnual()                        
 generar1=ReporteMensual()
+generar3=CalcularHMS()
 
 opt = 8
 while opt != 0:
     
     print("\n",
-        " 1) Generar reporte anual\n",
-        " 2) Generar report mensual\n",
-        " 3) Calcular segundos\n",
-        " 4) Calcular minutos\n",
-        " 5) Salir"
+        " 1) Generar reporte anual: \n",
+        " 2) Generar report mensual: \n",
+        " 3) Calcular segundos: \n",
+        " 4) Calcular horas: \n",
+        " 5) Salir: "
     )
     opt= input("Digite una opcion: ")
     if opt == "1":
         generar.generarAnual()
-        print("GENERATING FILE --> ReporteAnual.csv")
+        print("FILE.....ReporteAnual.csv")
     if opt == "2":
         generar1.generarMensual()
-        print("GENERATING FILE --> ReporteMensual.csv")
+        print("FILE....ReporteMensual.csv")
     if opt == "3":
-        None
+        generar3.segundos()
+    if opt == "4":
+        generar3.horas()
     if opt == "5":
         break
