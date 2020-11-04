@@ -46,31 +46,52 @@ class Contribuyente():
 		if cedula == 1:
 			cedula = input("Digite numero de cedula fisica")
 			self.cedulafisica = cedula
+			self.ID = self.cedulafisica
 			print("Cedula Fisica: ", self.cedulafisica,"Nombre: ",self.nombre, " Telefono:", self.telefono)
 		elif cedula == 2:
 			cedula = input("Digite numero de cedula juridica")
-			self.cedulajuridica = cedula	
+			self.cedulajuridica = cedula
+			self.ID = self.cedulajuridica
 			print("Cedula Juridica: ", self.cedulajuridica ,"Nombre: ",self.nombre, " Telefono:", self.telefono)
 
-class Vendedor():
+class Factura(Contribuyente):
     
-    def registrarVendedor(self):
-		#dic = {}
-		#super().__init__()  
-		#dic[self.identificacion] = self.nombre, self.telefono
-		#print(self.dic)
-    	pass
+    def __init__(self,fecha,monto, validar):
+        self.fecha = fecha
+        self.monto = monto
+        self.iva = 13
+        self.dic = {}
+        self.validar = validar
 
+    def detalle(self):
+        super().__init__()
+        self.total = (self.monto+(float(self.monto)*float(self.iva)/100))
+        self.dic[self.ID] = self.fecha, self.monto,self.iva, self.total
+
+    
+    def validarMetodo(self):
+        for k in self.dic.items():
+            print(k)
+            print(self.validar)
+            if self.validar == k:
+                Factura.detalle()
+            else:
+                print("ID no registrado")
 def menu():
-	nombre = input("Digite el nombre: ")
-	telefono = int(input("Digite el telefono: "))
-	cedula = int(input(("Escoja el tipo de cedula: \n"
+    nombre = input("Digite el nombre: ")
+    telefono = int(input("Digite el telefono: "))
+    cedula = int(input(("Escoja el tipo de cedula: \n"
 		"1) Fisica"
 		"2) Juridica"
 	)))
-	contri = Contribuyente(cedula, nombre, telefono)
+    contri = Contribuyente(cedula, nombre, telefono)
+
+def registarVentas():
+    validar = int(input(("Valir cedula existente: ")))
+    fecha = input("Digite fecha: ")
+    monto = int(input("Digite el monto: "))
+    factura1 = Factura(fecha, monto, validar)
+    factura1.validarMetodo() 
 
 menu()
-   
-  
-
+registarVentas()
