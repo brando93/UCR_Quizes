@@ -51,7 +51,7 @@ plazo = int(input("Ingrese plazo: "))
 interes = float(input("Ingrese interes: "))
 
 CajaAhorro1=CajaAhorro(nombre,cantidad)
-PlazoFijo1=PlazoFijo(1,3.5)
+PlazoFijo1=PlazoFijo(plazo,interes)
 CajaAhorro1.imprimir()
 PlazoFijo1.ImporteInteres()
 PlazoFijo1.mostrarInfo()
