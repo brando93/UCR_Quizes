@@ -15,3 +15,43 @@ Definir dos clases PlazoFijo y CajaAhorro que herede de la clase Cuenta, donde
 2.	Método para mostrar la información, datos del titular plazo, interés y total de interés.
 Cree un programa principal donde defina una variable de PlazoFijo y CajaAhorro, llene información necesaria y valide la funcionalidad de cada método.
 """
+
+class Cuenta():
+    
+    def __init__(self,titular,cantidad):
+        self.titular = str(titular)
+        self.cantidad = int(cantidad)
+        
+    def imprimir(self):
+        print( "Titutlar: ", self.titular, "Cantidad: ", self.cantidad)
+    
+class CajaAhorro(Cuenta):
+    
+    def __init__(self,titular,cantidad):
+        super().__init__(titular,cantidad)
+    
+class PlazoFijo(Cuenta):
+    
+    def __init__(self,plazo,interes):
+        super().__init__(plazo,interes)
+        self.plazo = int(plazo)
+        self.interes = float(interes)
+        self.porcentaje = 0
+        
+    def ImporteInteres(self):
+        self.porcentaje = (self.cantidad*self.interes/100)
+        
+    def mostrarInfo(self):
+        print("Plazo: ",self.plazo, "Interes: ",self.interes, "Porcentaje: ",self.porcentaje)
+
+
+nombre = input("Ingrese Nombre: ")
+cantidad = int(input("Ingrese cantidad: "))
+plazo = int(input("Ingrese plazo: "))
+interes = float(input("Ingrese interes: "))
+
+CajaAhorro1=CajaAhorro(nombre,cantidad)
+PlazoFijo1=PlazoFijo(1,3.5)
+CajaAhorro1.imprimir()
+PlazoFijo1.ImporteInteres()
+PlazoFijo1.mostrarInfo()
