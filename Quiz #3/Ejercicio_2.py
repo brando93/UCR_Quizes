@@ -30,4 +30,44 @@ Permita un diccionario como llave ID del vendedor registrar facturas de ventas d
 
 	Guardar los datos de facturas en un archivo con nombre “Facturas.bin”
 
+
+
+empresas y persoans tributan el 13%
+
 """
+class Contribuyente():
+    
+	def __init__(self,cedula,nombre, telefono):
+		self.nombre = nombre
+		self.telefono = telefono
+		if cedula == 1:
+			cedula = input("Digite numero de cedula fisica")
+			self.cedulafisica = cedula
+			print("Cedula Fisica: ", self.cedulafisica,"Nombre: ",self.nombre, " Telefono:", self.telefono)
+		elif cedula == 2:
+			cedula = input("Digite numero de cedula juridica")
+			self.cedulajuridica = cedula	
+			print("Cedula Juridica: ", self.cedulajuridica ,"Nombre: ",self.nombre, " Telefono:", self.telefono)
+
+class Vendedor():
+    
+    def registrarVendedor(self):
+		#dic = {}
+		#super().__init__()  
+		#dic[self.identificacion] = self.nombre, self.telefono
+		#print(self.dic)
+    	pass
+
+def menu():
+	nombre = input("Digite el nombre: ")
+	telefono = int(input("Digite el telefono: "))
+	cedula = int(input(("Escoja el tipo de cedula: \n"
+		"1) Fisica"
+		"2) Juridica"
+	)))
+	contri = Contribuyente(cedula, nombre, telefono)
+
+menu()
+   
+  
+
