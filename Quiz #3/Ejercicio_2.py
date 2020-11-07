@@ -43,17 +43,23 @@ class Contribuyente():
     def __init__(self,cedula,nombre, telefono):
         self.nombre = nombre
         self.telefono = telefono
-        self.basededatos = open("Base_de_Datos.txt","w")
+        self.basededatos = open("Base_de_Datos.txt","r")
+        caracter = ")(,''"
         if cedula == 1:
             cedula = input("Digite numero de cedula fisica: ")
             self.cedulafisica = cedula
             self.ID = self.cedulafisica
-            linea1 = "Cedula Juridica: ", self.cedulafisica
-            linea2 = "Nombre: ",self.nombre
-            linea3 = " Telefono:", self.telefono
-            linea = str(linea1)+str(linea2)+str(linea3)
-            print(linea)
-            self.basededatos.write(str(linea))
+            linea1 = self.cedulafisica
+            linea2 = self.nombre
+            linea3 = self.telefono
+            linea4 = (" %-30s  %-34s  %-10s " % (linea1, linea2, linea3))
+            linea = linea4
+            for i in caracter:
+                linea = linea.replace(i,"")
+            #titulo = (" %-30s  %-34s  %-10s " % ("Cedula Fisica", "Nombre", "Telefono"))
+            self.basededatos = open("Base_de_Datos.txt","a")
+            self.basededatos.write(str(linea+"\n"))
+            #self.basededatos.close()
         elif cedula == 2:
             cedula = input("Digite numero de cedula juridica: ")
             self.cedulajuridica = cedula
@@ -61,82 +67,84 @@ class Contribuyente():
             linea1 = "Cedula Juridica: ", self.cedulajuridica
             linea2 = "Nombre: ",self.nombre
             linea3 = " Telefono:", self.telefono
-            linea = str(linea1)+str(linea2)+str(linea3)
-            print(linea)
-            self.basededatos.write(str(linea))
+            linea = (" %-20s  %-20s  %-20s " % (linea1, linea2, linea3))
+            self.basededatos = open("Base_de_Datos.txt","a")
+            self.basededatos.write(str(linea+"\n"))
+            
+            #self.basededatos.close()
+            
 
 class Factura(Contribuyente):
     
     def __init__(self,fecha,monto, validar):
         self.dic = {}
-        super().__init__(cedula,nombre, telefono)
+        #super().__init__(cedula,nombre, telefono)
         self.fecha = fecha
         self.monto = monto
         self.iva = 13
         self.validar = validar
         
-        
-    def crearDic(self):
-        self.dic[self.ID] = self.nombre
-
-    def detalle(self):
-        self.dic1 = {}
-        self.total = (self.monto+((float(self.monto)*float(self.iva))/100))
-        self.dic1[self.validar] = str(self.fecha), str(self.monto), str(self.iva)+"%", str(self.total)
-
     def validarMetodo(self):
-        print(self.dic)
-        if self.validar in self.dic:
-            Factura.detalle()
-        else:
-            print("ID no registrado")
-                
+        self.basededatos = open("Base_de_Datos.txt","r")
+        for line in self.basededatos:
+            if self.validar in line:
+                self.total = (self.monto+((float(self.monto)*float(self.iva))/100))
+                linea_dic = self.validar,self.fecha, self.monto, self.iva, self.total
+                dos_ob = str(self.fecha), str(self.total)
+            self.basededatos = open("Base_de_Datos.txt","a")
+            self.basededatos.write(str(dos_ob))
+            print(dos_ob)
+            self.basededatos.close()
                 
     
     def ImprimirVenta(self):
-        self.imprimr = input("Ingrese ID :")
-        if self.imprimr in self.dic1:
-            linea=("Nombre: ",self.nombre+"\nFecha de Factura: ",self.dic1[self.imprimr][0]+"\nMonto: ",self.dic1[self.imprimr][1]+"\n")
-            print(linea)
-            self.basededatos.write(str(linea))
-        else:
-            print("Incorrect ID")
+        self.basededatos = open("Base_de_Datos.txt","r")
+        self.factura = open("Factura.txt","r")
+        self.imprimir = input("Ingrese ID :")
+        for line in self.basededatos:
+            if self.imprimir in line:
+                line = line.split()
+                for a in line:
+                    self.factura = open("Factura.txt","a")
+                    self.factura.write(str(line+"\n"))
+        print(self.total)
+        self.factura.close()
 
 
 def menu():
     opt = 0
-    try:
-        while opt != 5:
-            print(
-                "1) Registrar Vendedor \n"
-                "2) Registrar Ventas\n"
-                "3) Imprimir Ventas\n"
-                "4) Guardar datos\n"
-                "5) Salir\n"
-            )
-            opt=int(input("Ingrese una opcion: "))
-            if opt == 1:
-                nombre = input("Digite el nombre: ")
-                telefono = int(input("Digite el telefono: "))
-                cedula = int(input(("Escoja el tipo de cedula: \n"
-                    "1) Fisica: \n"
-                    "2) Juridica: \n"
-                )))
-                contri = Contribuyente(cedula, nombre, telefono)
-            elif opt ==2:
-                validar = input(("Validar cedula existente: "))
-                fecha = input("Digite fecha: ")
-                monto = float(input("Digite el monto: ")) 
-                factura1 = Factura(fecha, monto, validar)
-                factura1.crearDic()
-                factura1.validarMetodo()  
-            elif opt ==3:
-                factura1.ImprimirVenta() 
-            elif opt ==4:
-                None
-            elif opt ==5:
-                break
-    except:
-        print("Invalid option")
+    #try:
+    while opt != 5:
+        print(
+            "1) Registrar Vendedor \n"
+            "2) Registrar Ventas\n"
+            "3) Imprimir Ventas\n"
+            "4) Guardar datos\n"
+            "5) Salir\n"
+        )
+        opt=int(input("Ingrese una opcion: "))
+        if opt == 1:
+            nombre = input("Digite el nombre: ")
+            telefono = int(input("Digite el telefono: "))
+            cedula = int(input(("Escoja el tipo de cedula: \n"
+                "1) Fisica: \n"
+                "2) Juridica: \n"
+            )))
+            contri = Contribuyente(cedula, nombre, telefono)
+        elif opt ==2:
+            validar = input(("Registrar cedula: "))
+            fecha = input("Digite fecha: ")
+            monto = float(input("Digite el monto: ")) 
+            factura1 = Factura(fecha, monto, validar)
+            #factura1.crearDic()
+            factura1.validarMetodo()  
+        elif opt ==3:
+            factura1.ImprimirVenta() 
+        elif opt ==4:
+            None
+        elif opt ==5:
+            break
+    #except:
+    #    print("Invalid option")
 
 menu()
